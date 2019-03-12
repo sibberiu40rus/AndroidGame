@@ -37,8 +37,6 @@ public class MenuScreen extends Base2dScreen {
     }
 
 
-
-
     @Override
     public void render(float delta) {
 
@@ -58,16 +56,6 @@ public class MenuScreen extends Base2dScreen {
                 pos.add(v);
             }
         }pos.add(v2);
-
-
-
-
-
-
-
-
-
-
 
     }
 
