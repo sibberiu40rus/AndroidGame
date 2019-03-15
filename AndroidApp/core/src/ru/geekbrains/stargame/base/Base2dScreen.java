@@ -19,7 +19,7 @@ public abstract class Base2dScreen implements Screen, InputProcessor {
 
     @Override
     public void resize(int width, int height) {
-       // System.out.println("resize width = " + width + " height = " + height);
+
     }
 
     @Override

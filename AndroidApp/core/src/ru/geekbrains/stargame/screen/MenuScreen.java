@@ -59,16 +59,6 @@ public class MenuScreen extends Base2dScreen {
             }
         }pos.add(v2);
 
-
-
-
-
-
-
-
-
-
-
     }
 
     @Override
