@@ -12,31 +12,31 @@ import ru.geekbrains.stargame.sprites.Enemy;
 
 public class EnemiesEmitter {
 
-    private static final float ENEMY_SMALL_HEIGHT = 8f;
+    private static final float ENEMY_SMALL_HEIGHT = 5f;
     private static final float ENEMY_SMALL_BULLET_HEIGHT = 1f;
     private static final float ENEMY_SMALL_BULLET_VY = -35f;
     private static final int ENEMY_SMALL_DAMAGE = 1;
     private static final float ENEMY_SMALL_RELOAD_INTERVAL = 3f;
     private static final int ENEMY_SMALL_HP = 1;
 
-    private static final float ENEMY_MEDIUM_HEIGHT = 12f;
+    private static final float ENEMY_MEDIUM_HEIGHT = 8f;
     private static final float ENEMY_MEDIUM_BULLET_HEIGHT = 2f;
     private static final float ENEMY_MEDIUM_BULLET_VY = -35f;
     private static final int ENEMY_MEDIUM_DAMAGE = 3;
     private static final float ENEMY_MEDIUM_RELOAD_INTERVAL = 3f;
-    private static final int ENEMY_MEDIUM_HP = 3;
+    private static final int ENEMY_MEDIUM_HP = 5;
 
-    private static final float ENEMY_BIG_HEIGHT = 18f;
-    private static final float ENEMY_BIG_BULLET_HEIGHT = 3f;
+    private static final float ENEMY_BIG_HEIGHT = 10f;
+    private static final float ENEMY_BIG_BULLET_HEIGHT = 5f;
     private static final float ENEMY_BIG_BULLET_VY = -35f;
     private static final int ENEMY_BIG_DAMAGE = 3;
     private static final float ENEMY_BIG_RELOAD_INTERVAL = 3f;
-    private static final int ENEMY_BIG_HP = 6;
+    private static final int ENEMY_BIG_HP = 10;
 
 
     private Rect worldBounds;
 
-    private float generateInterval = 4f;
+    private float generateInterval = 2f;
     private float generateTimer;
 
     private TextureRegion[] enemySmallRegion;
@@ -50,6 +50,8 @@ public class EnemiesEmitter {
     private TextureRegion bulletRegion;
 
     private EnemyPool enemyPool;
+
+    private int level;
 
     public EnemiesEmitter(TextureAtlas atlas, Rect worldBounds, EnemyPool enemyPool) {
         this.worldBounds = worldBounds;
@@ -71,13 +73,14 @@ public class EnemiesEmitter {
         this.bulletRegion = atlas.findRegion("bulletEnemy");
     }
 
-    public void generate(float delta) {
+    public void generate(float delta, int frags) {
+        level = frags / 10 + 1;
         generateTimer += delta;
         if (generateTimer >= generateInterval) {
             generateTimer = 0f;
             Enemy enemy = enemyPool.obtain();
-            float changeEnemy = (float) Math.random() * 3;
-            if (changeEnemy >= 0 && changeEnemy < 1) {
+            float changeEnemy = (float) Math.random() * 10;
+            if (changeEnemy >= 0 && changeEnemy < 5) {
                 enemy.set(
                         enemySmallRegion,
                         enemySmallV,
@@ -89,7 +92,7 @@ public class EnemiesEmitter {
                         ENEMY_SMALL_HEIGHT,
                         ENEMY_SMALL_HP
                 );
-            }else if (changeEnemy >= 1 && changeEnemy < 2) {
+            }else if (changeEnemy >= 5 && changeEnemy < 8) {
                 enemy.set(
                         enemyMediumRegion,
                         enemyMediumV,
@@ -117,5 +120,9 @@ public class EnemiesEmitter {
             enemy.pos.x = Rnd.nextFloat(worldBounds.getLeft() + enemy.getHalfWidth(), worldBounds.getRight() - enemy.getHalfWidth());
             enemy.setBottom(worldBounds.getTop());
         }
+    }
+
+    public int getLevel() {
+        return level;
     }
 }

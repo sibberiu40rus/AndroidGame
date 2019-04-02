@@ -13,7 +13,7 @@ public class Sprite extends Rect {
     private float scale = 1f;
     private boolean isDestroyed;
     protected TextureRegion[] regions;
-    private int frame;
+    protected int frame;
 
     public Sprite() {
 
