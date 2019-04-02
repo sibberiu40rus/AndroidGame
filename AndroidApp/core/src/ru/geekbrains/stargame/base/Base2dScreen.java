@@ -19,7 +19,7 @@ public abstract class Base2dScreen implements Screen, InputProcessor {
     private Matrix3 screenToWorld;
 
     private Rect screenBounds;  // границы области рисования в пикселях
-    private Rect worldBounds;   // границы проекции мировых координат
+    protected Rect worldBounds;   // границы проекции мировых координат
     private Rect glBounds;      // квадрат OpenGL
 
     private Vector2 touch;
@@ -50,8 +50,8 @@ public abstract class Base2dScreen implements Screen, InputProcessor {
         screenBounds.setBottom(0);
 
         float aspect = width / (float) height;
-        worldBounds.setHeight(1f);
-        worldBounds.setWidth(1f * aspect);
+        worldBounds.setHeight(100f);
+        worldBounds.setWidth(100f * aspect);
         MatrixUtils.calcTransitionMatrix(worldToGl, worldBounds, glBounds);
         batch.setProjectionMatrix(worldToGl);
         MatrixUtils.calcTransitionMatrix(screenToWorld, screenBounds, worldBounds);
